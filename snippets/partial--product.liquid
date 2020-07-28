@@ -1,0 +1,245 @@
+{% assign view = partial--product %}
+{% assign has_hover = false %}
+{% if product.media.size > 1 and advanced--collection--hover-image %}
+  {% assign has_hover = true %}
+{% endif %}
+
+{% if view == 'product-page' %}
+
+  <div
+    class="partial--product view--full"
+    data-view="product-page"
+    itemscope
+    itemtype="http://schema.org/Product"
+    data-handle="{{ product.handle }}"
+    data-id="{{ product.id }}"
+    data-variants-size="{{ product.variants.size }}"
+  >
+    <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+    <meta itemprop="name" content="{{ product.title }}" />
+    <meta itemprop="image" content="https:{{ product.featured_media | img_url: '500x' }}" />
+    <script>theme.product_json[{{ product.id }}] = {{ product | json }}; </script>
+
+    <div class="details">
+
+      <div class="add-to-cart{% unless product.variants.size > 1 %} no-variants{% endunless %}">
+        {% form 'product', product %}
+          <div class="product-page--cart-container">
+
+            <div class="product-page--cart--column-a">
+
+              <div class="title-below">
+                <div class="spacing--3x show--small-medium">
+                  <a class="title" href="{{ product.url }}">
+                     
+                  </a>
+                </div>
+
+                {% unless section.settings.position-title-above %}
+                  <div class="spacing--3x show--large">
+                    <a class="title" href="{{ product.url }}">
+                      <h1 itemprop="name" class="font--block-heading">{{ product.title }}</h1>
+                    </a>
+                  </div>
+                {% endunless %}
+              </div>
+					<h1 class="font--block-heading" style="padding-left:.25em; padding-bottom: .25em;">{{ product.vendor}}</h1><br>
+                    <h1 itemprop="name" class="font--block-heading" style="padding-left:.25em">{{ product.title }}</h1><br>
+              <div class="yotpo bottomLine"
+                  data-product-id="{{ product.id }}">
+                  {%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+                {%- assign time_now = 'now' | date: '%s' %}
+                {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+                {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
+                {%- assign yotpo_bottomline_last_updated = product.metafields.yotpo.bottomline_update_time | date: '%s' %}
+                {%- assign diff_seconds_from_last_bottomline_update = time_now | minus: yotpo_bottomline_last_updated %}
+                {%- if yotpo_live_time and diff_seconds_from_live < 86400 and yotpo_bottomline_last_updated and diff_seconds_from_last_bottomline_update < 86400 -%}
+                 {%- assign yotpo_bottomline_obsolete = false %}
+                {%- else %}
+                 {%- assign yotpo_bottomline_obsolete = true %}
+                {%- endif %}
+                {%- if yotpo_offload_content == 'yes' and yotpo_bottomline_obsolete != true -%}
+                 {{ product.metafields.yotpo.bottomline }}
+                {%- endif %}
+                </div>
+              <div
+                class="price font--accent font--subheading--size"
+                itemprop="offers"
+                itemscope
+                itemtype="http://schema.org/Offer"
+                style="padding-left:1em;"
+              >
+                <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}" />
+                {% if product.available %}
+                  <link itemprop="availability" href="http://schema.org/InStock" />
+                {% else %}
+                  <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                {% endif %}
+
+                {% assign price_meta = product.selected_or_first_available_variant.price | divided_by: 100.00 %}
+                <meta itemprop="price" content="{{ price_meta }}">
+
+                {% if product.price > 0 %}
+                  <span class="compare-price money font--light-accent">
+                    {% if product.compare_at_price > product.price and product.available %}
+                      {{ product.compare_at_price | money }}
+                    {% endif %}
+                  </span>
+                  <span class="actual-price money">{{ product.price | money }}</span>
+                {% endif %}
+              </div>
+
+              <span class="selector-toggle {% unless product.variants.size > 1 %}hide-for-all{% endunless %}">
+                <label for="product-select-{{ product.id }}-option-0" class="hidden">
+                  {{ 'products.variants' | t }}
+                </label>
+                <select name="id" id="product-select-{{ product.id }}">
+                  {% for variant in product.variants %}
+                    <option
+                      data-sku="{{ variant.sku }}"
+                      {% if variant.inventory_quantity <= 0 and variant.available == false %}DISABLED {% endif %}{% if variant == product.selected_or_first_available_variant %}selected="selected" {% endif %}
+                      value="{{ variant.id }}"
+                    >
+                      {{ variant.title }} - {{ variant.price | money }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </span>
+
+              {% assign variant = product.selected_or_first_available_variant %}
+
+              <span class="{% unless product.available %} disabled{% endunless %}">
+                <input type="hidden" name="quantity" value="1">
+              </span>
+            </div>
+
+            <div class="product-page--cart--column-b">
+              {% if product.available == false %}
+                <span class="sold-out font--accent color--important">
+                  {{ 'collections.sold_out_html' | t }}
+                </span>
+              {% endif %}
+
+              <span class="{% unless product.available %} disabled{% endunless %}">
+                {% if template contains 'kickstarter' %}
+                  <a href="{{ settings.social--kickstarter--url }}" class="font--button">
+                    <span class="text">{{ 'products.back_on_kickstarter' | t }}</span>
+                  </a>
+                {% else %}
+                  {% assign cart_button_class = 'font--button' %}
+                  {% if section.settings.smart_payment_button %}
+                    {% assign cart_button_class = 'font--button' %}
+                  {% endif %}
+
+                  {% if product.available %}
+                    <button class="add {{ cart_button_class }}" type="submit" name="add" id="add">
+                      <span class="text">{{ 'products.add_to_cart' | t }}</span><span class="fw--loading_animation tiny" data-js-class="FrameworkLoadingAnimation"></span>
+                    </button>
+                  {% endif %}
+                {% endif %}
+              </span>
+
+              {% if section.settings.smart_payment_button and product.available %}
+                <div class="product-page--smart-payment-buttons">
+                  {{ form | payment_button }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endform %}
+      </div>
+
+      {% include 'partial--product--unavailable' %}
+
+    </div>
+  </div>
+
+{% else %} {% comment %} Grid or Collage View {% endcomment %}
+
+  <div class="product--root">
+    <div
+      class="partial--product view--{{ view }} index--{{ odd_or_even }}{% if has_hover %} has-hover{% endif %}"
+      data-view="{{ view }}"
+    >
+
+      <div class="product--image-wrapper">
+        <div class="product--image">
+          <a
+            class="image-wrapper"
+            href="{{ product.url | within: collection  }}"
+            title="{{ product.title }}"
+            aria-label="{{ product.title }}"
+          >
+            {%
+              include "framework--image",
+              image: product.featured_media.preview_image,
+              full_width: true
+            %}
+          </a>
+        </div>
+      </div>
+
+      <div class="caption">  
+        <div class="vendor">
+            <a itemprop="brand" href="{{ product.vendor | url_for_vendor }}">
+              {{ product.vendor }}
+            </a>
+          </div>
+        <a href="{{ product.url | within: collection  }}" title="{{ product.title }}">
+          <h2 class="title font--block-heading">
+            {{ product.title }}
+          </h2>
+        </a>
+
+      
+        
+
+
+        <a href="{{ product.url | within: collection  }}" title="{{ product.title }}">
+          <p class="price font--accent">
+            {% if product.price > 0 %}
+              {% if product.compare_at_price > product.price and product.available %}
+                <span class="compare-price money font--light-accent">
+                  {{ product.compare_at_price | money }}
+                </span>
+                <span class="actual-price money font--accent">{{ product.price | money }}</span>
+              {% else %}
+                {% if product.price_varies %}
+                  {{ 'collections.from' | t }}
+                {% endif %}
+                <span class="actual-price money font--accent">{{ product.price | money }}</span>
+              {% endif %}
+            {% endif %}
+
+            {% if product.available == false %}
+              <span class="sold-out font--accent">{{ 'collections.sold_out_html' | t }}</span>
+            {% endif %}
+          </p>
+        </a>
+      </div>
+
+    </div>
+  </div>
+{% endif %}
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Product",
+  "productID":"{{ product.id }}",
+  "name":"{{product.name}}",
+  "description":{{product.description}},
+  "url":"{{product.url}}",
+  "image":"{{product.image}}",
+  "brand":"{{product.vendor}}",
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": "{{product.price}}",
+      "priceCurrency": "USD",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock"
+    }
+  ]
+}
+</script>

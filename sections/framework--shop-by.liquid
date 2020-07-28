@@ -1,0 +1,92 @@
+{% comment %} Variables {% endcomment %}
+{% assign heading = section.settings.heading | escape %}
+{% include 'framework--background-colors', bg_color: section.settings.background-color %}
+
+{% comment %} View {% endcomment %}
+
+<div class="featured-grid--body" 
+  data-section-id="{{ section.id }}"
+  style="text-align: center;"
+>
+
+  <div class="featured-grid--item" data-width="53" style="width: 50%;">
+    <div class="featured-text--body font--paragraph rte-content">
+     {% if section.settings.link-text_2 != blank %}
+            <h2 class="featured-text--heading font--section-heading">
+              <a style="text-decoration: none;" href="#shopify-section-header" >
+                {{ section.settings.link-text_2 }}
+              </a>
+            </h2>
+          {% endif %}  
+    </div>
+  </div>
+  <div class="featured-grid--item" data-width="33" style="width: 50%;">
+    <div class="featured-text--body font--paragraph rte-content">
+     {% if section.settings.link-text_3 != blank %}
+           <h2 class="featured-text--heading font--section-heading">
+              <a  href="{{ section.settings.link-url-3 }}" style="text-decoration: none;">
+                {{ section.settings.link-text_3 }}
+              </a>
+            </h2>
+          {% endif %}  
+    </div>
+  </div>
+
+
+</div>
+
+{% schema %}
+  {
+    "name": "Shop By",
+    "settings": [
+          {
+        "type": "header",
+        "content": "Content"
+      },
+
+
+{
+
+        "type": "text",
+        "id": "link-text_1",
+        "label": "Text 1",
+        "default": "Shop by"
+      },   {
+      "type": "url",
+      "id": "link-url-1",
+      "label": "Link"
+    },
+    
+	
+      {
+        "type": "text",
+        "id": "link-text_2",
+        "label": "Text 2",
+        "default": "Shop by"
+      },
+    {
+      "type": "url",
+      "id": "link-url-2",
+      "label": "Link"
+    },
+
+		{
+        "type": "text",
+        "id": "link-text_3",
+        "label": "Text 3",
+        "default": "Shop by "
+      },
+    {
+      "type": "url",
+      "id": "link-url-3",
+      "label": "Link"
+    }
+    ],
+    "presets": [
+      {
+        "name": "Shop By",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}

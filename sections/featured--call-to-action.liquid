@@ -1,0 +1,71 @@
+{% comment %} Variables {% endcomment %}
+{% assign heading = section.settings.heading | escape %}
+{% include 'framework--background-colors', bg_color: section.settings.background-color %}
+
+{% comment %} View {% endcomment %}
+
+ <h2 class="featured-text--heading font--section-heading" style="text-align:center;">Pink Moon Promises to...</h2>
+<div class="featured-grid--body" 
+  data-section-id="{{ section.id }}"
+  style="text-align: center;"
+>
+ 
+  <div class="featured-grid--item" data-width="33" style="width: 30%; ">
+    <p class="featured-text--heading font--section-heading" style="font-size: 25px !important;margin: .5em;">
+      {{ section.settings.text_1 }}
+    </p>
+  </div>
+  <div class="featured-grid--item" data-width="33" style="width: 30%;">
+    <p class="featured-text--heading font--section-heading" style="font-size: 25px !important;margin: .5em;">
+      {{ section.settings.text_2 }}
+    </p>
+  </div>
+  <div class="featured-grid--item" data-width="33" style="width: 30%;">
+    <p class="featured-text--heading font--section-heading" style="font-size: 25px !important; margin: .5em;">
+      {{ section.settings.text_3 }}
+    </p>
+  </div>
+  <a href="/pages/about-pink-moon"> <button class="font--button"> LEARN MORE ABOUT OUR MISSION</button></a>
+</div>
+
+{% schema %}
+  {
+    "name": "Call To Action",
+    "settings": [
+      
+          {
+        "type": "header",
+        "content": "Content"
+      },
+
+{
+
+        "type": "text",
+        "id": "text_1",
+        "label": "Text 1",
+        "default": "Be your one-stop wellcare space for female-founded, sustainable beauty products."
+      },
+    
+	
+      {
+        "type": "text",
+        "id": "text_2",
+        "label": "Text 2",
+        "default": "Guide you to a better beauty experience, wherever that may lead."
+      },
+
+		{
+        "type": "text",
+        "id": "text_3",
+        "label": "Text 3",
+        "default": "Revolutionize the beauty industry to support and empower all women."
+      }
+    ],
+    "presets": [
+      {
+        "name": "Call to Action",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}

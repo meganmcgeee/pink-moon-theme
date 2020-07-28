@@ -1,0 +1,75 @@
+{% assign productTags = product.tags | join: ', ' %}
+
+
+<!--Now Check for the desired tag name-->
+{% if productTags contains 'multitasker' %}
+  <a href="/collections/multitasker">
+    <img class="product-icons" src="{{ 'multitasker.png' | asset_url }}"/>
+  </a>
+{% else %}
+{% endif %}
+
+{% if productTags contains 'Gluten free' %}
+  <a href="/collections/gluten-free">
+    <img class="product-icons"  src="{{ 'gluten-free.png' | asset_url }}"/>
+  </a>
+ {% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'Vegan' %}
+  <a href="/collections/vegan">
+    <img  class="product-icons" src="{{ 'vegan.png' | asset_url }}"/>
+  </a>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+
+{% if productTags contains 'handcrafted' %}
+  <a href="/collections/handcrafted">
+    <img  class="product-icons"  src="{{ 'handcrafted.png' | asset_url }}"/>
+  </a>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'pregnancy safe' %}
+  <a href="/collections/pregnancy-safe">
+    <img class="product-icons" src="{{ 'pregnancy-safe.png' | asset_url }}"/>
+  </a>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'small batch' %}
+  <a href="/collections/small-batch">
+    <img class="product-icons" src="{{ 'small-batch.png' | asset_url }}"/>
+  </a>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'farm to skin' %}
+  <a href="/collections/farm-to-skin">
+    <img class="product-icons" src="{{ 'farm-to-skin.png' | asset_url }}"/>
+  </a>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'cruelty free' %}
+  <a href="/collections/cruelty-free">
+    <img class="product-icons" src="{{ 'cruelty-free.png' | asset_url }}"/>
+  </a>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'for the whole family' %}
+  <a href="/collections/for-the-whole-family">
+    <img class="product-icons" src="{{ 'whole-family.png' | asset_url }}"/>
+  </a>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}

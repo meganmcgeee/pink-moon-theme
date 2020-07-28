@@ -1,0 +1,127 @@
+{% assign bg_color = settings.home--collection--bg-color %}
+
+{% capture image %}home--collection.jpg{% endcapture %}
+{% assign collection = section.settings.collection %}
+{% assign collection = collections[collection] %}
+
+{% assign placeholders_active = true %}
+{% if collection.handle.size > 0 or section.settings.image %}
+  {% assign placeholders_active = false %}
+{% endif %}
+
+{% if collection.handle.size > 0 and collection.products.size == 0 %}
+  {% assign errors_active = true %}
+{% endif %}
+
+{% if placeholders_active %}
+  {% assign collection_title = 'collections.placeholder.collection_title' | t %}
+{% else %}
+  {% assign collection_title = collection.title %}
+{% endif %}
+
+<div
+  class="template--index--collection"
+  data-section-id="{{ section.id }}"
+  data-section-type="index_collection"
+  data-js-class="IndexCollection"
+>
+  <div
+    class="fw--slider"
+    data-js-class="FrameworkSlider"
+    data-navigation="true"
+    data-pagination="false"
+    data-pagination-numbers="false"
+  >
+
+    {% if errors_active %}
+      <div class="slide">
+        <h3 class="text-align--center font--subheading fw--align--center-y">
+          {{ 'home.onboarding.no_content' | t }}
+        </h3>
+      </div>
+    {% endif %}
+
+    {% for product in collection.products limit: section.settings.max-products-range %}
+      <div class="slide">
+        <div class="wrapper text-align--center partial--product">
+          {% assign image = product.featured_media.preview_image %}
+
+          <a href="{{ product.url | within: collection }}" aria-label="{{ product.title }}">
+            {% include "framework--image", image: image, max_height: 450 %}
+          </a>
+
+          <div class="text-panel">
+            <h2 class="title spacing--3y font--section-heading">{{ product.title }}</h2>
+            <a class="font--button" href="{{ product.url | within: collection }}">
+              {{ 'home.more_details' | t }}
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% if placeholders_active %}
+
+      {% for i in (1..section.settings.max-products-range) %}
+        <div class="slide with-placeholder">
+          <div class="wrapper text-align--center partial--product">
+            {% assign placeholder_index = i | modulo: 5 | plus: 1 %}
+            {%
+              include "framework--placeholder",
+              type: "product",
+              aspect_ratio: 1,
+              placeholder_index: placeholder_index
+            %}
+
+            <div class="text-panel">
+              <h2 class="title spacing--3y font--section-heading">
+                {{ 'collections.placeholder.title' | t }}
+              </h2>
+              <a class="font--button" href="#">{{ 'home.more_details' | t }}</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% unless errors_active or placeholders_active or collection.handle.size == 0 %}
+      <div class="slide">
+        <div class="text-panel text-align--center">
+          <h2 class="title spacing--3y font--section-heading">{{ collection_title }}</h2>
+          <a class="font--button" href="{{ collection.url }}">
+            {{ 'home.view_collection' | t }}
+          </a>
+        </div>
+      </div>
+    {% endunless %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "label": "Amount of products to show",
+      "id": "max-products-range",
+      "type": "range",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

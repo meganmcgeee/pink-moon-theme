@@ -1,0 +1,518 @@
+{% assign productTags = product.tags | join: ', ' %}
+<!--Now Check for the desired tag name-->
+
+{% if productTags contains '5YINA' %}
+<div class="featured-content--container">
+  
+   <div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">5YINA</div>
+              <p>5YINA is a holistic organic skincare brand that was founded by doctors of Chinese medicine and modern-day alchemists, Angela Chau and Ervina Wu. Every step of the products is handcrafted: from the glass bottles, botanical extraction, blending, and to the final bottling. Using the highest grade and sustainably-sourced adaptogenic herbs that are wildcrafted or certified organic, 5YINA presents a collection that is pure, effective, and luxuriously beautiful to use.</p>
+                            <br>
+              <p><i>Social impact</i>: 5YINA gives back to various charities throughout the year to support first responders, rescue dogs, eco-advocacy, and breast cancer survivors</p>
+                            <br>
+               <a class="font--button" href="/collections/5yina">Shop 5YINA</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+              <img src="{{ '5yina.png' | asset_url }}" />
+            </div>
+            </div>
+ 
+ {% else %}
+
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'Activist Collective' %}
+   <div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Activist Collective</div>
+              <p>Handcrafted in California, Activist Collective was created by Allison Callaway on the premise that by caring for yourself, you’ll be better equipped to care for the world. To help advocates regenerate, Allison created the line focused on a minimal but efficacious approach to skincare.<br><br>
+                              
+              <p><i>Social impact</i>: 5% of Activist's revenue goes towards environmental advocacy</p>
+                            <br>
+              
+               <a class="font--button" href="/collections/activist-collective">Shop Activist Collective</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+               {% assign collection = collections.activist-collective %}
+                   {% if collection.image %}
+                       <a href="/collections/activist-collective">
+                      <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+                       </a>
+                   {% endif %}
+            </div>
+          </div>
+  </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+  {% if productTags contains 'akt therapy' %}
+ <div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">AKT Therapy</div>
+              <p>AKT Therapy is a line of luxurious, buildable, and effective protection from the sun and the elements. Founded by Janus Auermann in sunny SoCal, AKT is about embracing and celebrating the art of the body. She believes that true beauty is an outward expression of your authentic inner self. It is your essence: clean, radiant skin is an expression of that philosophy.<br>
+                              <br>
+              <p><i>Social impact</i>: AKT gives back to various animal rescue organizations including shelters in Mexico, Jersey Pits, and California Wildlife Rescue</p>
+                            <br>
+               <a class="font--button" href="/collections/akt-therapy">Shop AKT Therapy</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+             {% assign collection = collections.akt-therapy %}
+                   {% if collection.image %}
+                       <a href="/collections/akt-therapy">
+                      <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+                       </a>
+                   {% endif %}
+            </div>
+          </div>
+  </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+
+
+
+{% if productTags contains 'earthwise beauty' %}
+<div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Earthwise Beauty</div>
+              <p>Earthwise Beauty is an award winning artisanal skincare line from Spokane, WA created and formulated by herbalist and flower essence practitioner Ava Zhan. Each Earthwise Beauty product is high-performing, one-of-a-kind, luxurious and botanical-based that smells of wildflowers, dew-covered meadows, and mimosas in bloom. The uniquely vivid colors, textures, and scents give users an unparalleled multi-sensory experience.</p><br>
+              <p><i>Social impact</i>: Contributes to SeaLegacy, which protects and restores our world's oceans, and to various other eco-advocacy groups throughout the year</p>
+                            <br>
+               <a class="font--button"  href="/collections/earthwise-beauty">Shop Earthwise Beauty</a>
+                            <br>
+            </div>
+          </div>
+  {% assign collection = collections.earthwise-beauty %}
+{% if collection.image %}
+        <a href="/collections/earthwise-beauty">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+  </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+<!--  -->
+
+ 
+ {% if productTags contains 'cupid and psyche' %}
+ <div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Cupid & Psyche</div>
+              <p>Cupid & Psyche is a New York based line of gorgeous gluten-free, paraben-free, eco-friendly lipsticks founded by beauty and fashion photographer Tracy Toler-Phillips. Having spent more than two decades gaining distinct insights into cosmetic trends and staples, Tracy leveraged her experience to create a line of hand-poured lipsticks that contains a shade for every mood and skin tone.</p><br>
+              <p><i>Social impact</i>: Cupid & Psyche donates a percentage of sales to various nonprofits dedicated to saving bees, domestic animals, elephants, and rhinos</p>
+
+                            <br>
+               <a class="font--button"  href="/collections/cupid-psyche-beauty">Shop Cupid & Psyche</a>
+            </div>
+          </div>
+         {% assign collection = collections.cupid-psyche-beauty %}
+        {% if collection.image %}
+        <a href="/collections/cupid-psyche-beauty">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+  </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'elly lu organics' %}
+<div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Elly Lu</div>
+              <p>Founded by parents and teachers, Elly Lu was created with a goal of making the world a brighter place through its safe organic toys and educational books that inspire children to learn. The cuddly toys are made with sustainable materials and are ethically manufactured in Sri Lanka.</p>
+                            <br>
+              <p><i>Social impact</i>: A portion of profits are donated annually to World Vision's clean water initiative and to Ke Kai Ola Hawaiian Monk Seal Hospital</p>
+                            <br>
+               <a class="font--button" href="/collections/elly-lu-organics">Shop Elly Lu</a>
+            </div>
+          </div>
+        {% assign collection = collections.elly-lu-organics %}
+        {% if collection.image %}
+        <a href="/collections/elly-lu-organics">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+  </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'es studio' %}
+
+       <div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">ES Studio</div>
+              <p>Elena Scarlata is a graphic and textile designer who hand-makes luxury and sustainable textile products for everyday use. From her studio in Sicily, she makes eco-friendly and hand printed products inspired by the Mediterranean sea and history. Elena develops her products with natural and sustainable fabrics of the best quality.</p>
+                            <br>
+              
+               <a class="font--button" href="/collections/es-studio">Shop ES Studio</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+              {% assign collection = collections.es-studio %}
+{% if collection.image %}
+        <a href="/collections/es-studio">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+  </div>
+ 
+{% else %}
+ 
+<!--Tag not found :( -->
+{% endif %}
+{% if productTags contains 'lhamour' %}
+<div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Lhamour</div>
+              <p> Lhamour is the first natural wellness brand to emerge out of Mongolia. Founded by Khulan Davaadorj, Mongolia’s ‘Woman of the Year’, Lhamour’s products are handmade by women using local, organic, and raw ingredients, and several products are used in hospitals as remedies for eczema and psoriasis. Impactful self-care that is accessible.</p>
+                            <br>
+              <p><i>Social impac</i>t: Launched their own Girls in STEM program in Mongolia, and employs stay-at-home moms and women from marginalized communities</p>
+                            <br>
+               <a class="font--button" href="/collections/lhamour">Shop Lhamour</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+             {% assign collection = collections.lhamour %}
+{% if collection.image %}
+        <a href="/collections/lhamour">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+  </div>
+
+{% else %}
+ 
+
+
+
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'malaya organics' %}
+<div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Malaya Organics</div>
+              <p>Mālāya Organics is a Brooklyn based high-performance line founded by Katya Slepak, who has an extensive background in skincare product development and perfumery. Mālāya encompasses skincare, body care, hair care, candles, and plant-based fragrances. Products are made by hand in small batches from certified organic, wildcrafted, biodynamic, ethically-sourced potent plant-based actives.</p>
+                            <br>
+              <p><i>Social impact</i>: Contributes to charity: water to help bring clean, safe drinking water to people in developing countries</p>
+                            <br>
+               <a class="font--button"  href="/collections/malaya-organics">Shop Malaya Organics</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+              
+              {% assign collection = collections.malaya-organics %}
+{% if collection.image %}
+        <a href="/collections/malaya-organics">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+  </div>
+{% else %}
+
+
+
+
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'meant' %}
+  <div class="featured-content--container">
+          <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Meant</div>
+              <p>Meant is a multipurpose, hardworking all-natural and organic body care that proves the notion that less is everything. The line is designed to simplify your routine. Founded by Lindsay Knaak-Stuart, Meant offers clean, sustainable, multitasking skincare products for everyone and every body.</p>
+                            <br>
+              <p><i>Social impact</i>: A portion of sales are donated to various causes that are important to Meant including supporting schools and healthcare, and battling fires in Australia</p>
+                            <br>
+               <a class="font--button" href="/collections/meant">Shop Meant</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+             {% assign collection = collections.meant %}
+{% if collection.image %}
+        <a href="/collections/meant">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+  </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+<!--  -->
+
+ 
+ {% if productTags contains 'mo mi' %}
+  <div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">MO MI Beauty</div>
+              <p>MO MI Beauty is composed of a collection of hair and beauty products made for all living creatures. Founded by Diane Read, who was taught by her grandmother and mother to look to her spiritual well being for beauty, she mindfully created MO MI Beauty with compassion for animals and the planet.</p>
+                            <br>
+              <p><i>Social impact</i>: Donates to charities including NYC dog rescue Waggytail, Urban Resource Institute, which provides safe housing for victims of domestic abuse including their children and pets, and Rainforest Trust, which protects tropical lands and saves endangered species</p>
+                            <br>
+               <a class="font--button"  href="/collections/mo-mi-beauty">Shop MO MI Beauty</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+                          {% assign collection = collections.mo-mi-beauty %}
+{% if collection.image %}
+        <a href="/collections/mo-mi-beauty">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %} 
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'mome' %}
+ <div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">môme care</div>
+              <p>môme care is a wellness brand dedicated to children, pre-teens, and teens, with a mission to create products that are good both for the body and for the environment. Founded by a mom of two, France Crespin, môme care manufactures their products according to three principles: safety, effectiveness, and ecological care. môme care products are naturally made in France.<br><br>
+
+              <p><i>Social impact</i>: môme care donated 400 units of Indispensable Cream S to Mass General Hospital in Boston to support healthcare workers. Additionally, France volunteers her time a few times a week at Boston Food Bank</p>
+                            <br>
+               <a class="font--button"  href="/collections/mome-care">Shop môme care</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+              {% assign collection = collections.mome-care %}
+              {% if collection.image %}
+        <a href="/collections/mome-care">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'moss skincare' %}
+   <div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Moss Skincare</div>
+              <p>Handcrafted in Aurora, CO, moss celebrates the synergy between nature and science. Through creating a line formulated with potent active ingredients that are gentle to the skin, founder Celestyna Higgins products that are natural but in no way a compromise for those who are drawn to advanced dermatological technologies. </p><br>
+              <p><i>Social impact</i>: moss contributes to several nonprofits that help underserved immigrant children, families, and refugee</p>
+                            <br>
+               <a class="font--button" href="/collections/moss-skincare">Shop Moss Skincare</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+              {% assign collection = collections.moss-skincare %}
+              {% if collection.image %}
+        <a href="/collections/moss-skincare">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+  
+{% if productTags contains 'pink moon' %}
+<div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Pink Moon</div>
+              <p>Pink Moon is created by women, for women – of every phase of life. We're a collective of women here to guide you on your wellcare journey. We believe every woman deserves thoughtful guidance and support on her ever-changing journey with self-care.</p><br>
+              <p><i>Social impact</i>: We donate a part of the proceeds from our wellcare bundles to support WomanKind's domestic violence survivors, Direct Relief's first responder partners, and to provide financial assistance to Black women and girls nationally seeking therapy through Loveland Foundation's Therapy Fund</p>
+                            <br>
+               <a class="font--button"  href="/collections/pink-moon">Shop Pink Moon</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+             {% assign collection = collections.pink-moon %}
+              {% if collection.image %}
+        <a href="/collections/pink-moon">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'relato nativo' %}
+<div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Relato Nativo</div>
+              <p>Relato Nativo is a small batch, “slow beauty” line from the mountain forests of Oaxaca, Mexico. Created by artist Mafer Bretón, Relato Nativo combines traditional herbal medicine with modern science to create a truly special line.</p><br>
+
+
+              <p><i>Social impact</i>: Supports 300+ indigenous families and employs local Zapotec women. Plans to purchase meters of forest for preservation and turn land into a deer reserve.</p>
+                            <br>
+               <a class="font--button"  href="/collections/relato-nativo">Shop Relato Nativo</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+              {% assign collection = collections.relato-nativo %}
+              {% if collection.image %}
+        <a href="/collections/relato-nativo">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+{% if productTags contains 'risewell' %}
+<div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">RiseWell</div>
+              <p>The cleanest ingredients for your healthiest smile. RiseWell is backed by real science: The entire line is developed, tested and approved by a panel of leading dentists and doctors.</p>
+                            <br>
+            
+              <a class="font--button"  href="/collections/risewell">Shop RiseWell</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+               {% assign collection = collections.risewell %}
+              {% if collection.image %}
+        <a href="/collections/risewell">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'willow by the sea' %}
+
+ <div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Willow by the Sea</div>
+              <p>Willow by the Sea is a 100% certified organic baby skincare collection, made in small batches by the beach in Australia. Created by Corina and her husband Luke, Willow by the Sea is based on knowledge passed down from Corina's herbalist grandmother. The brand was also inspired by Corina's Romanian heritage, where it’s common for babies to bathe in chamomile tea.</p>
+                            <br>
+               <a class="font--button" href="/collections/willow-by-the-sea">Shop Willow by the Sea</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+               {% assign collection = collections.willow-by-the-sea %}
+              {% if collection.image %}
+        <a href="/collections/willow-by-the-sea">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+  
+  
+{% if productTags contains 'vivaiodays' %}
+<div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">VIVAIODAYS</div>
+              <p>VIVAIO (vee-vi-oh) means ‘nursery’ in Italian and has two meanings; it’s a place where young plants grow and a place where little kids learn as they grow. Founded by two parents who were inspired by centuries-old remedies, each COSMOS-Organic Certified product is formulated with the highest-quality ingredients - free from allergens and synthetic fragrances - and dermatologist-tested for sensitive skin.</p><br>
+              <p><i>Social impact</i>: Funds School Days for aspiring students and partners with fully accredited educational institutions around the globe, all packaging is made from 100% recyclable sugarcane </p>
+             
+                            <br>
+               <a class="font--button"  href="/collections/vivaiodays">Shop VIVAIOdays</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+              {% assign collection = collections.vivaiodays %}
+              {% if collection.image %}
+        <a href="/collections/vivaiodays">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}
+
+{% if productTags contains 'violets are blue' %}
+<div class="featured-content--container">
+ <div class="featured-content--image">
+            <div class="image--container" style="font-size: 22px !important; padding:.5em">
+              <div class="product-desc">Violets Are Blue</div>
+              <p>Violets Are Blue is an award winning eco-luxe skincare line created by Cynthia Besteman, a cancer survivor, public speaker and former Broadway actress. Handcrafted in small batches, the formulas feature gentle time-honored ingredients to restore and revive your skin.</p><br>
+
+
+              <p><i>Social impact</i>: 10% of purchase price of all products goes towards skincare donations for cancer patients at NYC’s Mt. Sinai Dubin Breast Center</p>
+              <br>
+               <a class="font--button" href="/collections/violets-are-blue">Shop Violets are Blue</a>
+            </div>
+          </div>
+          <div class="featured-content--text-collection-banner">
+            <div class="featured-content--text-container">
+               {% assign collection = collections.violets-are-blue %}
+              {% if collection.image %}
+        <a href="/collections/violets-are-blue">
+          <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.image.alt }}" />
+        </a>
+        {% endif %}
+            </div>
+          </div>
+    </div>
+{% else %}
+<!--Tag not found :( -->
+{% endif %}

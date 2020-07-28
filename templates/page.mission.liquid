@@ -1,0 +1,44 @@
+
+<div class="text-align--center spacing--3"><h1>Our Mission</h1></div>
+<img class="" style="width: 100% !important;" src="{{ 'treatment_room.jpg' | asset_url}}"/>
+      <div class="container">
+        <div class="column left spacing--2">
+          <p class="product-desc">Every woman has different wellcare needs, and those needs will change as her life does. We believe every woman should have support on her ever-changing journey with wellcare. </p>
+          <p class="typewriter-font"> Pink Moon is a <i>by women, for women</i> company that aspires to create a community that will provide <i>all</i> women with resources to feel empowered throughout life.<br><br>
+          Later this year, we plan to expand the digital Pink Moon wellcare space and create an immersive community experience. Additionally, in 2021, we hope to open a physical Pink Moon wellcare space in the Upper West Side of Manhattan, NYC! We are currently seeking angel investment + strategic partners to help us bring this vision to life. If you are an investor, please email <a href="mailto:info@pinkmoon.co">info@pinkmoon.co</a> for details.<br><br>
+          STAY TUNED FOR OUR NEXT POP-UP EVENT AND THE OPENING OF THE PINK MOON WELLCARESPACE.</p>
+          <p><em>Sign up for <a href="http://eepurl.com/giSGEP" target="_blank" rel="noopener noreferrer">our newsletter</a> for updates!</em></p>
+        </div>
+        <div class="column right spacing--2">{{ page.content }}</div>
+      
+    </div>
+
+<style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      /* text-align: center; */
+      /* font-weight: bold; */
+    }
+
+@media only screen and (max-width: 600px) {
+  .container{
+    margin: 1.5em;
+  }
+}
+    .left, .right {
+      flex: 1 300px;
+      min-width: 0;
+      /* background: #f55; */
+      padding: 15px 0;
+    }
+    #right {
+      /* background: #57f; */
+    }
+   @media only screen and (max-width: 600px) {
+  .product-desc{
+    font-size: 25px;
+  }
+} 
+  
+  </style>

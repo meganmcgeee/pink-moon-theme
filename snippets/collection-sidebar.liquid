@@ -1,0 +1,200 @@
+	<div class="closeFilter hidden-sm hidden-md hidden-lg"><i class="ad ad-times" aria-hidden="true"></i></div>
+	<div class="sidebar_tags wow fadeInUp">
+  	{% for block in section.blocks %}
+	
+
+{% if template contains 'collection' and collection.url == '/collections/skincare' or collection.url == '/collections/cleanse'  or collection.url == '/collections/hydrate-treat' or collection.url == '/collections/tools' or collection.url == '/collections/mask' or collection.url == '/collections/moisturize' or collection.url == '/collections/body-bath' %}
+   
+        {% comment %} *** Filters BY ... *** {% endcomment %}
+        {% if block.type == 'filter_by' %}
+            <div class="sidebar_widget filterBox">
+              <div class="widget-title h2" style="font-size: 20px !important; font-weight: 700;padding-bottom: 1.5em; padding-top: 1em;">{{block.settings.title}}</div>
+              
+              <div class="widget-content">
+         
+                  {% assign tags = block.settings.filter_tags | split: ',' %}
+                  <ul {% if block.settings.two_column %}class="twoColl"{% endif %}>          	     
+                    {% for filter_t in tags %}
+                        {% assign tag = filter_t | strip %}
+                        {% assign tag_value = tag | handleize %}
+                        {% assign filtertag = forloop.index | minus:1 %}
+                        {% assign filtertagid = 2 | times : filtertag %}
+                       
+                    {% if collection.tags contains tag %}
+                        <li class="" style="display: flex; padding-top: .4em; padding-bottom:.4em;">
+                          <label class="container title font--block-heading" style="font-size: 13px; !important; padding-top:.3em;" for="{{block.id}}-{{filtertagid}}"><span><span></span></span>{{tag}}
+                          <input type="checkbox" value="{{ tag_value  }}" id="{{block.id}}-{{filtertagid}}" {% if current_tags contains tag %}checked{% endif %} />
+                          <span class="checkmark"></span>
+                          </label>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                  </ul>
+                <style>
+                  /* Customize the label (the container) */
+
+                  .container {
+                    display: block;
+                    position: relative;
+                    padding-left: 35px;
+                    margin-bottom: 12px;
+                    cursor: pointer;
+                    font-size: 22px;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                  }
+
+                  /* Hide the browser's default checkbox */
+                  .container input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                    height: 0;
+                    width: 0;
+                  }
+
+                  .checkmark {
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      height: 25px;
+                      width: 25px;
+                      background-color: #eee;
+                    }
+
+                    /* On mouse-over, add a grey background color */
+                    .container:hover input ~ .checkmark {
+                      background-color: #ccc;
+                    }
+
+                    /* When the checkbox is checked, add a blue background */
+                    .container input:checked ~ .checkmark {
+                      background-color: #f593a2;
+                    }
+
+                    /* Create the checkmark/indicator (hidden when not checked) */
+                    .checkmark:after {
+                      content: "";
+                      position: absolute;
+                      display: none;
+                    }
+
+                    /* Show the checkmark when checked */
+                    .container input:checked ~ .checkmark:after {
+                      display: block;
+                    }
+
+                    /* Style the checkmark/indicator */
+                    .container .checkmark:after {
+                      left: 9px;
+                      top: 5px;
+                      width: 5px;
+                      height: 10px;
+                      border: solid white;
+                      border-width: 0 3px 3px 0;
+                      -webkit-transform: rotate(45deg);
+                      -ms-transform: rotate(45deg);
+                      transform: rotate(45deg);
+                    }
+
+                </style>
+              </div>
+            </div>
+        {% endif %}
+        
+        {% else %}
+        
+        {% endif %}
+      	
+<!--       	{% comment %} *** Filters BY Color *** {% endcomment %}
+        {% if block.type == 'by_color' %}
+            <div class="sidebar_widget filterBox">            
+              <div class="widget-title h2">{{block.settings.title}}</div>
+              <div class="widget-content">
+                  {% assign tags = block.settings.filter_tags | split: ',' %}
+                  <ul class="filter-color">          	     
+                    {% for filter_t in tags %}
+                      {% assign tag = filter_t | strip %}
+                      {% assign tag_value = tag | handleize %}
+                      {% assign filtertag = forloop.index | minus:1 %}
+                      {% assign filtertagid = 2 | times : filtertag %}
+                      {% if collection.tags contains tag %}
+                      <li>
+                        <input type="checkbox" value="{{ tag_value }}"  id="{{block.id}}-{{ filtertagid }}" {% if current_tags contains tag %}checked{% endif %} />
+                        {% if block.settings.color_setting == 'swatch' %}
+                        <label for="{{block.id}}-{{ filtertagid }}" class="color {{tag_value}}" title="{{tag}}"><span style="background-color:{{tag_value}}"></span></label>
+                        {% else %}
+                        <label for="{{block.id}}-{{ filtertagid }}" class="color {{tag_value}}" title="{{tag}}"><span style="background-color:{{tag_value}}; background-size:cover; background-image:url({{ tag_value | handleize | append: '.png' | file_url | split: "?" | first }})"></span></label>
+                        {% endif %}
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+            	</div>
+      		</div>
+        {% endif %} -->
+      
+<!--       	{% comment %} *** Product Slider *** {% endcomment %}
+        {% if block.type == 'products' %}
+            <div class="sidebar_widget">
+              <div class="widget-title h2">{{block.settings.title}}</div>
+              <div class="widget-content">
+                  {% if block.settings.sidebar_products != blank %}
+                  <div class="sidebar-products-{{block.settings.side_prod_opt}} grid-products">
+                      <div class="grid" grid-products {% if block.settings.side_prod_opt == "slider" %}id="sideProdSlider"{% endif %}>
+                        {% if block.settings.side_prod_opt == "slider" %}
+                        	{%- assign image_size = '250x' -%}
+                        {% else %}
+                        	{%- assign image_size = '100x' -%}
+                        {% endif %}
+                        {% for product in collections[block.settings.sidebar_products].products limit:block.settings.num_of_products %}
+                        	<div class="clearfix">{% include 'product-card-grid', grid_image_width: image_size %}</div>
+                        {% endfor %}
+                      </div>
+                      {% if block.settings.side_all_products %}
+                    	<div class="text-center"><a href="{{block.settings.sidebar_products}}" class="btn">{{'collections.general.view_all' | t}}</a></div>
+                   	  {% endif %} 
+                  </div>
+                  {% else %}
+                      <p>Please select collection from store admin > Customize > Collection page > Sidebar</p>
+                  {% endif %} 
+              </div>
+      		</div>
+        {% endif %}
+      
+      	{% comment %} *** Image Banner *** {% endcomment %}
+        {% if block.type == 'image_bnr' %}
+      		<div class="sidebar_widget static-banner">
+              {% if block.settings.side_bnr_link != blank %}
+              	<a href="{{ block.settings.side_bnr_link }}">
+              {% endif %}
+                  {% if block.settings.side_bnr_img != blank %}
+                        {{ block.settings.side_bnr_img | img_url: '300x' | img_tag }}
+                  {% else %}
+                      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+					  {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+              {% if block.settings.side_bnr_link != blank %}
+              	</a>
+              {% endif %}
+            </div>
+        {% endif %}
+      	
+      	{% comment %} *** Static Text Block *** {% endcomment %}
+        {% if block.type == 'static_text' %}
+            <div class="sidebar_widget">
+              <div class="widget-title h2">{{block.settings.title}}</div>
+              <div class="widget-content">
+                  {% if block.settings.text != blank %}
+                  {{ block.settings.text }}
+                  {% else %}
+                      <p>Please select collection from store admin > Customize > Collection page > Sidebar</p>
+                  {% endif %} 
+              </div>
+      		</div>
+        {% endif %} -->
+      	
+  	{% endfor %}
+	</div>

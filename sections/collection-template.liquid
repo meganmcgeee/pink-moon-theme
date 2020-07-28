@@ -1,0 +1,562 @@
+{% if template contains 'list' %}
+  {%- assign limit = 24 -%}
+{% else %}
+  {%- assign limit = section.settings.rows -%}
+{% endif %}
+
+{% paginate collection.products by limit %}
+
+<div class="CollectionPage" 
+     data-section-id="{{ section.id }}" 
+     id="{{ section.id }}" 
+     data-section-type="collection-template">
+     {% if collection.image != blank %}
+
+  
+ <div
+  class="featured-content-banner--root"
+  data-section-id="{{ section.id }}"
+  data-full-width="true"
+  data-dark-background="{{ dark_background }}"
+  data-overlap="false"
+  data-transparent-overlap="{{ section.settings.transparent-overlap }}"
+  data-text-exists="true"
+  data-text-position="right"
+  data-alternative-color="{{ section.settings.alternative-color }}"
+  data-text-width="large"
+  style="{% if bg_color %}background-color: {{ bg_color }};{% endif %}"
+>
+  {% if cover_link %}<a href="{{ section.settings.link-url }}">{% endif %}
+  <div class="featured-content-banner--container">
+    <div class="featured-content-banner--image">
+      {% if collection.handle == 'multitasker' or 'handcrafted' or 'gluten-free' or 'pregnancy-safe' or 'small-batch' or 'vegan' or 'cruelty-free' or 'farm-to-skin' or 'for-the-whole-family'%}
+              <img style=""src="{{ collection.image.src| img_url: "master" }}" alt="{{ collection.image.alt }}" />
+            {% else %} 
+              <img src="{{ collection.image.src | img_url: "master"}}" alt="{{ collection.image.alt }}" />
+      
+      {% endif %}
+    </div>
+      <div class="featured-content-banner--text">
+        <div class="featured-content-banner--text-container">
+          <h2 class="featured-grid--title font--section-heading">
+              {{collection.title}}
+            </h2>
+            <h2 class="featured-content-banner--title font--section-heading">
+              {{collection.description}}
+            </h2>
+        </div>
+      </div>
+    </div>
+</a>
+
+</div>
+  {% else %}
+  <div class="featured-content-banner--text" style="text-align:center;max-width:100%;">
+        <div class="featured-content-banner--text-container">
+            <h2 class="featured-grid--title font--section-heading">
+              {{collection.title}}
+            </h2>
+        </div>
+      </div>
+      {% endif %} 
+ <div style="display: flex">
+<!--   Filterbar -->
+  {% if section.settings.collection_sidebar %}
+     <div class="grid__item large-up--one-quarter sidebar filterbar" style="margin-left: 3em; margin-right: 3em;">
+       {% if template contains 'collection' and collection.url == '/collections/skincare' or collection.url == '/collections/cleanse'  or collection.url == '/collections/hydrate-treat' or collection.url == '/collections/tools' or collection.url == '/collections/mask' or collection.url == '/collections/moisturize'%}
+       {% include 'collection-sidebar' %}
+       {% endif %}
+       {% if template contains 'collection' and collection.url == '/collections/body-bath'or collection.url == '/collections/hair-care' or collection.url == '/collections/soaps'or collection.url == '/collections/salts-scrubs' or collection.url == '/collections/deodorants' or collection.url == '/collections/butters-lotions' or collection.url == '/collections/aromatherapy' or collection.url == '/collections/fragrances' or collection.url == '/collections/oral-care'or collection.url == '/collections/mama-baby' %}
+      	 {% include 'collection-sidebar-bathbody' %}
+       {% endif %}
+     </div>
+     {% endif %}
+  
+  <section class="product-grid layout-type--grid fw--blocks clear-after--medium-2 width--medium-3">
+<!--   	<section class="page-width" id="Collection"> -->
+		<div class="grid">
+
+			<!-- Right sidebar -->
+			<div class="grid__item{% unless sidebar_position == 'popup' or section.settings.collection_sidebar == false %} large-up--three-quarters main-col{% endunless %} {{content_position}}">
+             
+              {% if collection.image == blank or section.settings.show_collection_image != true   %}
+              <div class="page section-header"> 
+<!--                 <h1 class="h4">{{ collection.title }}</h1> -->
+                {% if collection.description != blank %}
+                  <!-- <div class="rte">
+                    {{ collection.description }}                         
+                  </div> -->
+                {% endif %}  
+              </div>
+              {% endif %}
+              
+              	<div class="productList">
+
+					<div class="grid grid--uniform grid-products{% if collection.products_count > 0 %} grid--view-items{% endif %}">
+                  		{% for product in collection.products %}               					                  
+							<div class="grid__item {{ grid_item_mb }} {{ grid_item_tb }} {{grid_item_ds}}">
+                      		{% include 'product-card-grid', grid_image_width: image_size %} 
+                    		</div>
+						{% else %}
+							{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+							<div class="grid__item {{ grid_item_width }}">
+								<div class="grid grid--uniform">
+                                  	{% for i in (1..limit) %}
+									<div class="grid__item {{ grid_item_mb }} {{ grid_item_tb }} {{grid_item_ds}}">
+										<div class="grid-view-item">
+                                  			<a href="#" class="grid-view-item__link">
+												<div class="">
+                                                  	{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+													{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                                              	</div>
+												<div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+												<div class="grid-view-item__meta"> <span class="product-price__price">$19.99</span></div>
+								  			</a>
+                              			</div>
+									</div>
+									{% endfor %}
+                     			</div>
+							</div>
+							{% else %}
+								{%- assign is_empty_collection = true -%}
+							{% endif %}
+						{% endfor %} 
+					</div>
+
+				{% if is_empty_collection %}
+				<div class="grid__item small--text-center">
+					<p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+				</div>
+				{% endif %}
+              </div>
+                
+				{% if paginate.pages > 1 %}
+              		{% if section.settings.pagination == "infinite" or section.settings.pagination == "button" %}
+              			{% if paginate.next %}
+              				<div class="infinitpaginOuter" data-type="{{section.settings.pagination}}">
+              					<div class="infinitpagin">
+                                  	{% if section.settings.pagination == "infinite" %}
+                                  		<a href="{{paginate.next.url}}" class="infinite"><img src="{{ 'ajax-loader.gif' | asset_url }}" alt="{{ 'general.pagination.loading' | t }}" /><p>{{ 'general.pagination.loading' | t }}</p></a>
+                                 
+                                  	{% endif %}
+                              	</div>
+              				</div>
+                        {% endif %}
+              		{% else %}
+              			<hr class="clear" />
+						{% include 'pagination' %}
+              		{% endif %}
+				{% endif %}
+          	</div>
+
+		</div>
+	</section>
+  
+</div>
+</div>
+{% if paginate.pages > 1 %}
+        <footer>
+          <div class="collection--pagination">
+            {% include 'framework--pagination' %}
+          </div>
+        </footer>
+        <div class="spacing--3y"></div>
+      {% endif %}
+{% endpaginate %}
+{% if section.settings.collection_sidebar %}
+	{% include 'filter-js' %}
+{% endif %}
+{% schema %}
+  {
+    "name": "Collection pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_collection_image",
+        "label": "Show collection image",
+        "default": true,
+		"info":"Change Image Overlay and Text Colors from Theme Settings => Colors => Collection Page Collection Image Overlay"
+      }, 
+      {
+        "type": "checkbox",
+        "id": "sort_enable",
+        "label": "Enable sorting",
+        "default": true
+      },
+      {
+        "type": "paragraph",
+        "content": "Products per row (grid only)"
+      },
+	  {
+        "type": "select",
+        "id": "grid",
+        "label": "Desktop",
+        "default": "4",
+        "options": [ 
+		  { "value": "2", "label": "2" },
+          { "value": "3", "label": "3" },
+          { "value": "4", "label": "4" },
+          { "value": "5", "label": "5" },
+          { "value": "6", "label": "6" }		 
+        ]
+      },
+	  {
+        "type": "select",
+        "id": "tablet-grid",
+        "label": "Tablet",
+        "default": "3",
+        "options": [        
+          { "value": "2", "label": "2" },
+          { "value": "3", "label": "3" },
+          { "value": "4", "label": "4" }
+        ]
+      },
+	  {
+        "type": "select",
+        "id": "mobile-grid",
+        "label": "Mobile",
+        "default": "2",
+        "options": [        
+          { "value": "1", "label": "1" },
+		  { "value": "2", "label": "2" },
+          { "value": "3", "label": "3" }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "rows",
+        "label": "Products per page (grid only)",
+        "default": "24"
+      },
+      {
+        "type": "select",
+        "id": "pagination",
+        "label": "Pagination type",
+        "default": "button",
+        "options": [
+          { "value": "default", "label": "Default" },
+          { "value": "infinite", "label": "Infinite Scroll" },
+          { "value": "button", "label": "Load more button" }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Sidebar & Filters"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_sidebar",
+        "label": "Enable Sidebar",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "sidebar_position",
+        "label": "Sidebar Position",
+        "default": "left",
+		"info":"Only filter blocks show while select Popup Box option.",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "popup",
+            "label": "Popup Box"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": "Click on 'Add content' link below to add sidebar section."
+      }
+    ],
+	"blocks": [
+      {
+        "type": "categories",
+        "name": "Categories",
+        "limit": 1,
+        "settings": [
+         	{ 
+              "type":"text",
+              "id":"title",
+              "label":"Categories",
+              "default":"Categories"
+          	},
+            {
+              "type": "link_list",
+              "id": "side_categories",
+              "label": "Select Categories",
+              "default": "main-menu"
+            }
+        ]
+      },
+	  {
+        "type": "filter_by",
+        "name": "Filter By",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Filter By Title",
+				"default": "Filter By Title",
+                "info": "i.e 'Filter by Size, Filter by Brands'"
+            },
+            {
+                "type": "textarea",
+                "id": "filter_tags",
+                "label": "Add Filter tags",
+                "info": "Separate by a comma, i.e \"Tag1, Tag2, Tag3\"."
+            },
+            {
+              "type": "checkbox",
+              "id": "two_column",
+              "label": "Show in Two Column",
+              "default": false
+            }
+      	]
+     },
+	  {
+        "type": "filter_by_bath",
+        "name": "Filter Bath Products",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Filter By Title",
+				"default": "Filter By Title",
+                "info": "i.e 'Filter by Size, Filter by Brands'"
+            },
+            {
+                "type": "textarea",
+                "id": "filter_tags",
+                "label": "Add Filter tags",
+                "info": "Separate by a comma, i.e \"Tag1, Tag2, Tag3\"."
+            },
+            {
+              "type": "checkbox",
+              "id": "two_column",
+              "label": "Show in Two Column",
+              "default": false
+            }
+      	]
+     },
+{
+        "type": "filter_by_phase",
+        "name": "Filter by Phase",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Filter By Title",
+				"default": "Filter By Title",
+                "info": "i.e 'Filter by Size, Filter by Brands'"
+            },
+            {
+                "type": "textarea",
+                "id": "filter_tags",
+                "label": "Add Filter tags",
+                "info": "Separate by a comma, i.e \"Tag1, Tag2, Tag3\"."
+            },
+            {
+              "type": "checkbox",
+              "id": "two_column",
+              "label": "Show in Two Column",
+              "default": false
+            }
+      	]
+     },
+     {
+        "type": "by_color",
+        "name": "Filter by Colors",
+        "limit": 1,
+        "settings": [
+         	{ 
+              "type":"text",
+              "id":"title",
+              "label":"Filter by section title",
+              "default":"Filter by Color"
+          	},
+            {
+              "type": "select",
+              "id": "color_setting",
+              "label": "Swatch Layout Option",
+              "default": "swatch",
+              "options": [
+                {
+                  "value": "swatch",
+                  "label": "Swatch Color"
+                },
+                {
+                  "value": "image",
+                  "label": "Image Upload"
+                }
+              ],
+			  "info": "Image name must same as color name and in lowercase. Use '-' instead of space. Examples (Black = black.png, Navy Blue = navy-blue.png). Upload images at 'settings > files'"
+            },
+            {
+             "type": "textarea",
+             "id": "filter_tags",
+             "label": "Add Filter tags",
+             "info": "Separate by a comma, i.e \"Black, Red, Blue\"."
+           },
+           {
+             "type": "paragraph",
+			 "content": "Only html color name will work to show color while select Swatch color options. [Find HTML color name here](https:/\/\www.w3schools.com/\colors/\colors_names.asp)"
+           }
+			
+        ]
+     },
+     {
+        "type": "products",
+        "name": "Products",
+		"limit": 1,
+        "settings": [
+         	{ 
+              "type":"text",
+              "id":"title",
+              "label":"Title Text",
+              "default":"Popular Products"
+          	},
+            {
+              "type": "collection",
+              "id": "sidebar_products",
+              "label": "Select Collection"
+            },
+            {
+              "type": "text",
+              "id": "num_of_products",
+              "label": "Number of products to show",
+              "default": "3"
+            },
+			{
+              "type": "checkbox",
+              "id": "side_all_products",
+              "label": "View all products button",
+              "default": false
+            },
+            {
+              "type": "select",
+              "id": "side_prod_opt",
+              "label": "Display Type",
+              "default": "slider",
+              "options": [
+                {
+                  "value": "slider",
+                  "label": "Slider"
+                },
+                {
+                  "value": "list",
+                  "label": "List"
+                }
+              ]
+            }
+        ]
+      },
+	  {
+        "type": "image_bnr",
+        "name": "Image Banner",
+        "settings": [
+            {
+              "type": "image_picker",
+              "id": "side_bnr_img",
+              "label": "Banner Image"
+            },
+            {
+              "type": "url",
+              "id": "side_bnr_link",
+              "label": "Banner"
+            }
+      	]
+      },
+	  {
+        "type": "static_text",
+        "name": "Static Text",
+        "settings": [
+            { 
+              "type":"text",
+              "id":"title",
+              "label":"Title Text",
+              "default":"Static Block Title"
+          	},
+            {
+              "type": "richtext",
+              "id": "text",
+              "label": "Text",
+              "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+            }
+      	]
+      },
+	  {
+        "type": "slideshow",
+        "name": "Slideshow at content area",
+        "settings": [
+            {
+              "type": "paragraph",
+              "content": "Upload all the images of same size"
+            },
+			{
+              "type": "checkbox",
+              "id": "display_mobile",
+              "label": "Display Slideshow on Mobile",
+              "default": true
+            },
+            {
+              "type": "image_picker",
+              "id": "cat-bnr-1",
+              "label": "Banner 1"
+            },
+            {
+              "type": "url",
+              "id": "cat-bnr--url-1",
+              "label": "Banner 1 Url"
+            },
+            {
+              "type": "image_picker",
+              "id": "cat-bnr-2",
+              "label": "Banner 2"
+            },
+            {
+              "type": "url",
+              "id": "cat-bnr--url-2",
+              "label": "Banner 2 Url"
+            },
+            {
+              "type": "image_picker",
+              "id": "cat-bnr-3",
+              "label": "Banner 3"
+            },
+            {
+              "type": "url",
+              "id": "cat-bnr--url-3",
+              "label": "Banner 3 Url"
+            },
+            {
+              "type": "image_picker",
+              "id": "cat-bnr-4",
+              "label": "Banner 4"
+            },
+            {
+              "type": "url",
+              "id": "cat-bnr--url-4",
+              "label": "Banner 4 Url"
+            },
+            {
+              "type": "image_picker",
+              "id": "cat-bnr-5",
+              "label": "Banner 5"
+            },
+            {
+              "type": "url",
+              "id": "cat-bnr--url-5",
+              "label": "Banner 5 Url"
+            }
+      	]
+      }
+	]
+  }
+{% endschema %}

@@ -1,0 +1,47 @@
+{% unless template == 'password' %}
+
+  {% assign bg_color = settings.popup--background-color %}
+  {% include 'framework--background-colors', bg_color: bg_color %}
+
+  {% assign enabled = settings.popup--enabled %}
+  {% assign show-image = settings.popup--show-image %}
+  {% assign newsletter-enabled = settings.popup--newsletter--enabled %}
+  {% assign newsletter-title = settings.popup--newsletter-title--rt %}
+  {% assign social-enabled = settings.popup--social-enabled %}
+  {% assign social-title = settings.popup--social-title | escape %}
+  {% assign days = settings.popup--days %}
+
+  {% if enabled %}
+
+    {% if component == 'link' %}
+      <div class="popup--open button--link">{{ 'layout.header.follow' | t }}</div>
+    {% elsif component == 'main' %}
+      <div
+        class="popup--root"
+        data-js-class="Popup"
+        data-show-again-after="{{ settings.popup--days-range }}"
+        data-mode="{{ settings.popup--mode }}"
+        data-popup--image="{{ show-image }}"
+        data-alternative-color="{{ settings.popup--alternative-color }}"
+      >
+
+        <div
+          class="popup--container popup--closed"
+          style="{% if bg_color %}background-color: {{ bg_color }};{% endif %}"
+        >
+          <div class="popup--wrapper">
+
+			<p>Pink Moon uses cookies to make our website work and to give you the best possible experience on our website. 
+  				By using this website, you consent to the placement of these cookies. For more information, see our Privacy Policy.</p>
+		
+            <div aria-label="{{ 'popup.close' | t }}" class="popup--close">
+              <button class="font--button">Close and Accept</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  {% endif %}
+
+{% endunless %}

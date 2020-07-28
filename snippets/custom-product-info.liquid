@@ -1,0 +1,163 @@
+
+ {% assign br = '"}' %}
+ {% assign nb= "" %}
+ {% assign blProductHeadline = '{"Product headline"=>"' %}
+ {% assign blProductQuote ='{"Product quote"=>"'%}
+ {% assign blProductDescCursive = '{"Product description cursive"=>"' %}
+ {% assign blSize = '{"Product size"=>"' %}
+ {% assign blTip = '{"Insider Tip"=>"' %}
+ {% assign blRitual = '{"The Ritual"=>"'%}
+ {% assign blIngredients = '{"Ingredients"=>"' %}
+
+ {% assign productHeadline = product.metafields.product_headline|  replace: blProductHeadline, nb %}
+ {% assign productQuote = product.metafields.product_quote |  replace: blProductQuote, nb %}
+ {% assign productDescCursive = product.metafields.product_desc_cursive |  replace: blProductDescCursive, nb %}
+ {% assign productSize = product.metafields.product_size |  replace: blSize, nb %}
+ {% assign productTip = product.metafields.product_tip |  replace: blTip, nb %}
+ {% assign productRitual = product.metafields.product_ritual |  replace: blRitual, nb %}
+ {% assign productIngredients = product.metafields.product_ingredients |  replace: blIngredients, nb %}
+ 
+
+ 
+ <div class="custom-product-wrapper spacing--2">
+  {%- if product.metafields.product_headline != blank -%}
+  {%- for field in product.metafields.product_headline -%}
+  <p class="product-desc">{{ productHeadline |  replace: br, n}}</p>
+ {%- endfor -%}
+ {%endif%}
+    
+     </div>
+<div class="container spacing--2">
+  <div class="left">
+    {%- if product.metafields.product_quote != blank -%}
+          {%- for field in product.metafields.product_quote -%}
+            <p class="product-quote"><p class="product-quote">{{ productQuote |  replace: br, nb}}</p></p>
+            {%- endfor -%}
+          {%endif%}
+  <div class="product-description-wrapper">
+        <p itemprop="description" style="font-size:14px; line-height:24px;">{{product.description}}</p>
+    </div>
+        {%- if product.metafields.product_desc_cursive != blank -%}
+          {%- for field in product.metafields.product_desc_cursive -%}
+            <p class="product-desc-cursive text-align--center spacing--3 ">{{ productDescCursive |  replace: br, nb}}</p>
+            {%- endfor -%}
+          {%endif%}
+          <div class="spacing--3 text-align--center">
+            {% include 'product-icons'%}
+          </div>
+
+ 
+  </div>
+  <div class="middle">
+    {%- if product.metafields.product_size != blank -%}
+    {%- for field in product.metafields.product_size -%}
+     <h4 class="custom-product-header spacing--1">SIZE→ 
+       <span> {{ productSize |  replace: br, n}}</span></h4>
+     {%- endfor -%}
+     {%endif%}
+
+
+  {%- if product.metafields.product_tip != blank -%}
+    {%- for field in product.metafields.product_tip -%}
+    <div class="spacing--1">
+      <h4 class="custom-product-header">INSIDER TIP</h4>
+      <p class="product-tip">{{ productTip |  replace: br, n | replace:'\"htt','htt' | replace:'\"', ''}}</p>
+  </div>
+   {%- endfor -%}
+   {%endif%}
+   {%- if product.metafields.product_ritual != blank -%}
+     {%- for field in product.metafields.product_ritual -%}
+     <div class="spacing--1">
+      <h4 class="custom-product-header">RITUAL</h4>
+       <p class="product-ritual">{{ productRitual |  replace: br, n | replace:'\"htt','htt' | replace:'\"', ''}}</p>
+      </div>
+     {%- endfor -%}
+   {%endif%}
+
+   {%- if product.metafields.product_ingredients != blank -%}
+     {%- for field in product.metafields.product_ingredients -%}
+     <div class="spacing--1">
+      <h4 class="custom-product-header">INGREDIENTS</h4>
+       <p class="product-ingredients">{{ productIngredients |  replace: br, n}}</p>
+     </div>
+     {%- endfor -%}
+   {%endif%}
+  </div>
+
+
+<style>
+  .product-desc{
+	padding-bottom: 1em;
+/*     max-width: 60%; */
+  }
+  .container {
+/*     display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+    justify-content:flex-start; */
+    align-items:stretch;
+}
+
+/* .left {order:1; flex-basis:100%; height:100% !important;}
+.middle {order:2;flex-basis:100%; height:100%!important;}
+.right {order:3;flex-basis:100%; height:100% !important;} */
+
+@media screen and (min-width:600px) {
+   .container {
+/*        flex-wrap:nowrap; */
+   } 
+
+    .left {
+/*         flex-basis:1; */
+        order:1;
+      margin-right: 2em;
+    }
+    .middle {
+/*         flex-basis:1; */
+        order:2;
+    }
+    .right {
+/*         flex-basis:1; */
+        order:3;
+    }
+  .product-desc{
+	padding-bottom: .75em;
+    max-width: 100%;
+  }
+  .left ul{
+  
+/*   padding: 2em; */
+  }
+}
+  
+.custom-product-header > p{
+  font-family: 'Compagnon Roman' !important;
+     padding-bottom: 1em;
+
+}
+.product-quote {
+    font-family: 'Compagnon Roman' !important;
+     padding-bottom: 1em;
+}
+@media screen and (max-width: 600px) {
+     
+  .product-desc{
+      width: 100% !important;
+       font-size: 24px !important;
+    } 
+       
+ .product-description-wrapper ul ul li{
+     margin-left: 2em;
+    } 
+  }
+  
+  .custom-product-header span{
+  	font-family: 'Degular Medium';
+  }
+  
+    
+    .middle a, .middle a:link, .middle a:visited{
+    text-decoration: underline;
+    font-weight: 700;}
+  }
+</style>

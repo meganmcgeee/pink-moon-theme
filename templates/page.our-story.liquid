@@ -1,0 +1,44 @@
+
+<div class="text-align--center spacing--3"><h1>Our Story</h1></div>
+      <div class="container spacing--2 fw--blocks">
+        <div class="column left width--6">
+           <img class="image-scale-hack lazyautosizes lazyloaded" style="max-widthwidth: 100% !important;" src="{{ 'Lin_Chen_2.jpg' | asset_url}}"/>
+          </div>
+          
+      <div class="column right spacing--2">
+        <p class="product-desc">Lin Chen is a social entrepreneur who aspires to revolutionize the beauty industry through Pink Moon.</p>
+       {{ page.content }}</div>
+         </div>
+
+
+
+<style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      /* text-align: center; */
+      /* font-weight: bold; */
+    }
+
+@media only screen and (max-width: 600px) {
+  .container{
+    margin: .5em;
+  }
+}
+    .left, .right {
+      flex: 1 300px;
+      min-width: 0;
+      /* background: #f55; */
+      padding: 15px 0;
+    }
+    #right {
+      /* background: #57f; */
+    }
+ @media only screen and (max-width: 600px) {
+  .product-desc{
+    font-size: 25px;
+  }
+} 
+  
+  </style>
+
